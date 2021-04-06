@@ -1,0 +1,173 @@
+@font-face {
+    font-family: 'StarWars';
+    src: url(src/fonts/STARWARS.ttf);
+}
+
+html {
+    min-height: 100%;
+}
+
+body {
+    max-width: 100%;
+    background: url(../hw13/src/img/background.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.selector {
+    display: flex;
+}
+
+#select_episode {
+    width: 500px;
+    margin: 20px;
+    font-family: 'StarWars';
+    font-size: 30px;
+    color: #f8f400;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    text-align: center;
+    letter-spacing: 0.2px;
+    background: #0e0d0d2f;
+    border: 2px solid #f8f400;
+    box-shadow: 0px 0px 5px 1px #f8f400;
+    font-family: 'StarWars';
+    cursor: pointer;
+}
+
+.button {
+    height: 100px;
+    width: 250px;
+    margin: 20px;
+    background: #0e0d0d2f;
+    border: 2px solid #f8f400;
+    box-shadow: 0px 0px 5px 1px #f8f400;
+    font-family: 'StarWars';
+    color: #f8f400;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    text-align: center;
+    cursor: pointer;
+}
+
+.button a {
+    position: relative;
+    font-family: 'StarWars';
+    font-size: 30px;
+    color: #f8f400;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    text-align: center;
+    top: 35%;
+    letter-spacing: 0.2px;
+}
+
+.list {
+    max-width: 100%;
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.character,
+.planet {
+    background: #0e0d0dc2;
+    height: 450px;
+    width: 350px;
+    margin: 10px;
+    background: #251e1ebe;
+    border: 1px solid #f8f400;
+    box-shadow: 0px 0px 5px 0px #f8f400;
+    animation: slide-up 1s ease;
+}
+
+.character_img,
+.planet_img {
+    height: 300px;
+    width: 290px;
+    position: relative;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    /*background: rgb(44, 44, 44);*/
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image {
+    background-size: cover;
+    background-position: center;
+    max-height: 300px;
+    max-width: 290px;
+}
+
+.name {
+    position: relative;
+    left: 10px;
+    font-family: 'StarWars';
+    font-size: 30px;
+    color: #f8f400;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+
+.additiona_info {
+    margin: 0 auto;
+    max-width: 80%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.gender {
+    position: relative;
+    left: 10px;
+    font-family: 'StarWars';
+    font-size: 30px;
+    font-weight: 700;
+    color: #f8f400;
+    text-shadow: -1px -1px 0 #000, 2px -1px 0 #000, -1px 2px 0 #000, 1px 2px 0 #000;
+    margin-bottom: 15px;
+}
+
+.male:before {
+    font-family: 'icomoon';
+    content: "\f222";
+    color: #0019f8;
+}
+
+.n\/a::before {
+    font-family: 'icomoon';
+    content: "\f17b";
+}
+
+.none::before {
+    font-family: 'icomoon';
+    content: "\f17b";
+}
+
+.female::before {
+    font-family: 'icomoon';
+    content: "\f221";
+    color: #f800d7;
+}
+
+.birthdate {
+    position: relative;
+    left: 10px;
+    font-family: 'StarWars';
+    font-size: 16px;
+    font-weight: 700;
+    color: #f8f400;
+    margin-bottom: 15px;
+}
+
+@keyframes slide-up {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
