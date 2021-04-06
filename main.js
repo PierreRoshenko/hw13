@@ -33,7 +33,7 @@ function getcharters() {
             ep_characters.map((ep, i) => {
                 axios.get(ep_characters[i])
                     .then((res) => {
-                        console.log(res.data.name);
+
                         const listItem = document.createElement('div')
                         listItem.classList.add('character')
                         listItem.setAttribute('id', res.data.name)
@@ -45,7 +45,7 @@ function getcharters() {
                         listItemImg.classList.add('image');
                         listItem.appendChild(listItemImgFrame);
                         listItemImgFrame.appendChild(listItemImg);
-                        listItemImg.setAttribute("src", "src/img/" + `${res.data.name}` + '.jpg'); //`url('../src/img/${res.data.name}.jpg')`;
+                        listItemImg.setAttribute("src", "src/img/" + `${res.data.name}` + '.jpg');
 
                         const listItemText = document.createElement('div')
                         listItemText.classList.add('name')
@@ -103,18 +103,23 @@ function getPlanets() {
     const ep_n = document.querySelector("#select_episode").value - 1
     axios.get('https://swapi.dev/api/films')
         .then((res) => {
-            const ep_characters = res.data.results[ep_n].planets
-            ep_characters.map((ep, i) => {
-                axios.get(ep_characters[i])
+            const ep_planets = res.data.results[ep_n].planets
+            ep_planets.map((ep, i) => {
+                axios.get(ep_planets[i])
                     .then((res) => {
+                        console.log(res.data.name);
                         const listItem = document.createElement('div')
                         listItem.classList.add('planet')
                         listItem.setAttribute('id', res.data.name)
                         list.appendChild(listItem)
 
-                        const imgCharter = document.createElement("div")
-                        imgCharter.classList.add('planet_img')
-                        listItem.appendChild(imgCharter)
+                        const listItemImg = document.createElement("img");
+                        const listItemImgFrame = document.createElement("div");
+                        listItemImgFrame.classList.add('planet_img');
+                        listItemImg.classList.add('image');
+                        listItem.appendChild(listItemImgFrame);
+                        listItemImgFrame.appendChild(listItemImg);
+                        listItemImg.setAttribute("src", "src/img/" + `${res.data.name}` + '.jpg');
 
                         const listItemText = document.createElement('div')
                         listItemText.classList.add('name')
