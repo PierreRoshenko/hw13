@@ -3,7 +3,7 @@ const PlanetsBtn = document.querySelector('#planets')
 characterBtn.addEventListener('click', getcharters)
 PlanetsBtn.addEventListener('click', getPlanets)
 
-axios.get('http://swapi.dev/api/films/')
+axios.get('https://swapi.dev/api/films/')
     .then((res) => {
         const ep_select = document.querySelector("#select_episode")
         const episodes = res.data.results
@@ -27,7 +27,7 @@ function getcharters() {
     list.classList.add('list')
     document.body.append(list)
     const ep_n = document.querySelector("#select_episode").value - 1
-    axios.get('http://swapi.dev/api/films')
+    axios.get('https://swapi.dev/api/films')
         .then((res) => {
             const ep_characters = res.data.results[ep_n].characters
             ep_characters.map((ep, i) => {
@@ -101,7 +101,7 @@ function getPlanets() {
     document.body.append(list)
 
     const ep_n = document.querySelector("#select_episode").value - 1
-    axios.get('http://swapi.dev/api/films')
+    axios.get('https://swapi.dev/api/films')
         .then((res) => {
             const ep_planets = res.data.results[ep_n].planets
             ep_planets.map((ep, i) => {
