@@ -21,7 +21,7 @@ axios.get('https://swapi.dev/api/films/')
 
 
 function getcharters() {
-    console.clear()
+
     if (document.querySelector('#nextBtn')) document.querySelector('#nextBtn').remove()
     if (document.querySelector('#prevBtn')) document.querySelector('#prevBtn').remove()
 
@@ -98,7 +98,7 @@ function removeBtn() {
 }
 
 function createNextBtn() {
-    console.log(res);
+
     const list = document.createElement('div')
     list.classList.add('list')
     document.body.append(list)
@@ -115,9 +115,7 @@ let curentPage = 1
 
 function getPlanets() {
     removeBtn()
-    console.clear()
     curentPage = 1
-    console.log(curentPage);
     if (document.querySelector('#nextBtn')) document.querySelector('#nextBtn').remove()
     if (document.querySelector('#prevBtn')) document.querySelector('#prevBtn').remove()
     if (document.querySelector(".list")) document.querySelector(".list").remove()
@@ -152,10 +150,7 @@ function getPlanets() {
 
     axios.get(`https://swapi.dev/api/planets/`)
         .then((res) => {
-            console.log(res);
-            console.log(res.data.results);
             res.data.results.map((el, i) => {
-                console.log(el.name);
                 const listItem = document.createElement('div')
                 listItem.classList.add('planet')
                 listItem.setAttribute('id', res.data.name)
@@ -185,7 +180,6 @@ function getPlanets() {
                         if (res.data.next != null) curentPage++
 
                             res.data.results.map((el, i) => {
-                                console.log(el.name);
                                 const listItem = document.createElement('div')
                                 listItem.classList.add('planet')
                                 listItem.setAttribute('id', res.data.name)
@@ -217,7 +211,6 @@ function getPlanets() {
                     .then((res) => {
                         if (res.data.previous != null) curentPage--
                             res.data.results.map((el, i) => {
-                                console.log(el.name);
                                 const listItem = document.createElement('div')
                                 listItem.classList.add('planet')
                                 listItem.setAttribute('id', res.data.name)
@@ -239,31 +232,6 @@ function getPlanets() {
                             })
                     })
             })
-
-            /* const ep_planets = res.data.results[ep_n].planets
-            ep_planets.map((ep, i) => {
-                axios.get(ep_planets[i])
-                    .then((res) => {
-                        console.log(res.data.name);
-                        const listItem = document.createElement('div')
-                        listItem.classList.add('planet')
-                        listItem.setAttribute('id', res.data.name)
-                        list.appendChild(listItem)
-
-                        const listItemImg = document.createElement("img");
-                        const listItemImgFrame = document.createElement("div");
-                        listItemImgFrame.classList.add('planet_img');
-                        listItemImg.classList.add('image');
-                        listItem.appendChild(listItemImgFrame);
-                        listItemImgFrame.appendChild(listItemImg);
-                        listItemImg.setAttribute("src", "src/img/" + `${res.data.name}` + '.jpg');
-
-                        const listItemText = document.createElement('div')
-                        listItemText.classList.add('name')
-                        listItem.appendChild(listItemText)
-                        listItemText.innerHTML += (res.data.name).toUpperCase()
-                    })
-            }) */
         })
 
 }
