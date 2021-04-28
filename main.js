@@ -18,9 +18,12 @@ axios.get('https://swapi.dev/api/films/')
 
     })
 
+
+
 function getcharters() {
     console.clear()
-
+    if (document.querySelector('#nextBtn')) document.querySelector('#nextBtn').remove()
+    if (document.querySelector('#prevBtn')) document.querySelector('#prevBtn').remove()
 
     if (document.querySelector(".list")) document.querySelector(".list").remove()
     const list = document.createElement('div')
@@ -84,26 +87,160 @@ function removeBtn() {
     document.querySelector('.selector').appendChild(removeBtn)
     const removeText = document.createElement('a')
     removeBtn.appendChild(removeText)
+
     removeText.innerHTML = `REMOVE`
     removeBtn.addEventListener('click', () => {
         document.querySelector(".list").remove()
+        if (document.querySelector('#nextBtn')) document.querySelector('#nextBtn').remove()
+        if (document.querySelector('#prevBtn')) document.querySelector('#prevBtn').remove()
         removeBtn.remove()
     })
 }
 
+function createNextBtn() {
+    console.log(res);
+    const list = document.createElement('div')
+    list.classList.add('list')
+    document.body.append(list)
+    const nextBtn = document.createElement('div')
+    nextBtn.classList.add('button')
+    nextBtn.setAttribute('id', 'nextBtn')
+    document.querySelector('.selector').appendChild(nextBtn)
+    const nextBtnText = document.createElement('a')
+    nextBtn.appendChild(nextBtnText)
+    nextBtnText.innerHTML = `NEXT`
+}
+
+let curentPage = 1
+
 function getPlanets() {
+    removeBtn()
     console.clear()
-
-
+    curentPage = 1
+    console.log(curentPage);
+    if (document.querySelector('#nextBtn')) document.querySelector('#nextBtn').remove()
+    if (document.querySelector('#prevBtn')) document.querySelector('#prevBtn').remove()
     if (document.querySelector(".list")) document.querySelector(".list").remove()
+
+
+
     const list = document.createElement('div')
     list.classList.add('list')
     document.body.append(list)
 
-    const ep_n = document.querySelector("#select_episode").value - 1
-    axios.get('https://swapi.dev/api/films')
+
+    const prevBtn = document.createElement('div')
+    prevBtn.classList.add('button')
+    prevBtn.setAttribute('id', 'prevBtn')
+    document.querySelector('.selector').appendChild(prevBtn)
+    const prevBtnText = document.createElement('a')
+    prevBtn.appendChild(prevBtnText)
+    prevBtnText.innerHTML = `PREVIUS`
+
+
+    const nextBtn = document.createElement('div')
+    nextBtn.classList.add('button')
+    nextBtn.setAttribute('id', 'nextBtn')
+    document.querySelector('.selector').appendChild(nextBtn)
+    const nextBtnText = document.createElement('a')
+    nextBtn.appendChild(nextBtnText)
+    nextBtnText.innerHTML = `NEXT`
+
+
+
+
+
+    axios.get(`https://swapi.dev/api/planets/`)
         .then((res) => {
-            const ep_planets = res.data.results[ep_n].planets
+            console.log(res);
+            console.log(res.data.results);
+            res.data.results.map((el, i) => {
+                console.log(el.name);
+                const listItem = document.createElement('div')
+                listItem.classList.add('planet')
+                listItem.setAttribute('id', res.data.name)
+                list.appendChild(listItem)
+
+                const listItemImg = document.createElement("img");
+                const listItemImgFrame = document.createElement("div");
+                listItemImgFrame.classList.add('planet_img');
+                listItemImg.classList.add('image');
+                listItem.appendChild(listItemImgFrame);
+                listItemImgFrame.appendChild(listItemImg);
+                listItemImg.setAttribute("src", "src/img/" + `${el.name}` + '.jpg');
+
+                const listItemText = document.createElement('div')
+                listItemText.classList.add('name')
+                listItem.appendChild(listItemText)
+                listItemText.innerHTML += (el.name).toUpperCase()
+
+            })
+            nextBtn.addEventListener('click', () => {
+                if (document.querySelector(".list")) document.querySelector(".list").remove()
+                const list = document.createElement('div')
+                list.classList.add('list')
+                document.body.append(list)
+                axios.get(`https://swapi.dev/api/planets/?page=${curentPage+1}`)
+                    .then((res) => {
+                        if (res.data.next != null) curentPage++
+
+                            res.data.results.map((el, i) => {
+                                console.log(el.name);
+                                const listItem = document.createElement('div')
+                                listItem.classList.add('planet')
+                                listItem.setAttribute('id', res.data.name)
+                                list.appendChild(listItem)
+
+                                const listItemImg = document.createElement("img");
+                                const listItemImgFrame = document.createElement("div");
+                                listItemImgFrame.classList.add('planet_img');
+                                listItemImg.classList.add('image');
+                                listItem.appendChild(listItemImgFrame);
+                                listItemImgFrame.appendChild(listItemImg);
+                                listItemImg.setAttribute("src", "src/img/" + `${el.name}` + '.jpg');
+
+                                const listItemText = document.createElement('div')
+                                listItemText.classList.add('name')
+                                listItem.appendChild(listItemText)
+                                listItemText.innerHTML += (el.name).toUpperCase()
+
+                            })
+                    })
+            })
+
+            prevBtn.addEventListener('click', () => {
+                if (document.querySelector(".list")) document.querySelector(".list").remove()
+                const list = document.createElement('div')
+                list.classList.add('list')
+                document.body.append(list)
+                axios.get(`https://swapi.dev/api/planets/?page=${curentPage-1}`)
+                    .then((res) => {
+                        if (res.data.previous != null) curentPage--
+                            res.data.results.map((el, i) => {
+                                console.log(el.name);
+                                const listItem = document.createElement('div')
+                                listItem.classList.add('planet')
+                                listItem.setAttribute('id', res.data.name)
+                                list.appendChild(listItem)
+
+                                const listItemImg = document.createElement("img");
+                                const listItemImgFrame = document.createElement("div");
+                                listItemImgFrame.classList.add('planet_img');
+                                listItemImg.classList.add('image');
+                                listItem.appendChild(listItemImgFrame);
+                                listItemImgFrame.appendChild(listItemImg);
+                                listItemImg.setAttribute("src", "src/img/" + `${el.name}` + '.jpg');
+
+                                const listItemText = document.createElement('div')
+                                listItemText.classList.add('name')
+                                listItem.appendChild(listItemText)
+                                listItemText.innerHTML += (el.name).toUpperCase()
+
+                            })
+                    })
+            })
+
+            /* const ep_planets = res.data.results[ep_n].planets
             ep_planets.map((ep, i) => {
                 axios.get(ep_planets[i])
                     .then((res) => {
@@ -126,7 +263,7 @@ function getPlanets() {
                         listItem.appendChild(listItemText)
                         listItemText.innerHTML += (res.data.name).toUpperCase()
                     })
-            })
+            }) */
         })
-    removeBtn()
+
 }
